@@ -79,9 +79,9 @@ func ahoCorasickSearch(root *trieNode, text string) []string {
 			continue
 		}
 		node = node.children[char]
-		if node.isEndOfWord {
-			results = append(results, node.output...)
-		}
+		// output also holds patterns inherited through failure links,
+		// so check it rather than isEndOfWord.
+		results = append(results, node.output...)
 	}
 
 	return results
